@@ -1,0 +1,48 @@
+import casa.*
+import cosas.*
+
+test "Tengo $1000 y quiero sacar $900" {
+	
+	cuentaCorriente.depositar(1000)
+	
+	cuentaCorriente.extraer(900)
+	
+	assert.equals( 100 , cuentaCorriente.saldo() )
+
+}
+
+test "Tengo $1000 y quiero sacar 1200" {
+	
+	
+	cuentaCorriente.depositar(1000)
+	
+	assert.throwsException({cuentaCorriente.extraer(1200)})
+	
+	assert.equals(1000 , cuentaCorriente.saldo())
+
+}
+
+test "Tengo $1000 y compro tira de asado" {
+	
+	cuentaCorriente.depositar(1000)
+	
+	casa.comprar(tiraDeAsado)
+	
+	assert.that(casa.cosas().contains(tiraDeAsado))
+	
+	assert.equals(650 , cuentaCorriente.saldo())
+
+}
+
+test "Tengo $1000 y compro una plancha, no me alcanza" {
+	
+	cuentaCorriente.depositar(1000)
+	
+	assert.notThat(casa.cosas().contains(plancha))
+	
+	assert.equals(0, casa.cosas().size())
+	
+	assert.throwsException({casa.comprar(plancha)})
+	
+	assert.notThat(casa.cosas().contains(plancha))
+}
