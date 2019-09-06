@@ -23,7 +23,7 @@ object casa {
 		
 	const listaFaltantes = self.queFaltaComprar(lista)
 	
-	listaFaltantes.ForEach({ producto => self.comprar(producto)} )
+	listaFaltantes.forEach({ producto => self.comprar(producto)} )
 	
 	}
 
